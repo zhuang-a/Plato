@@ -1,0 +1,16 @@
+{
+  "id": "1576733",
+  "name": "xinli",
+  "font_family": "iconfont",
+  "css_prefix_text": "el-icon-xinli-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "12468805",
+      "name": "logo",
+      "font_class": "logo",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    }
+  ]
+}

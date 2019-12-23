@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "core-js": "^3.4.3",
-    "vue": "^2.6.10"
+    "vue": "^2.6.10",
+    "element-ui": "latest",
+    "v-charts": "latest",
+    "vue-router": "latest"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^4.1.0",
@@ -18,6 +21,7 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "leancloud-storage": "^4.1.0",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {

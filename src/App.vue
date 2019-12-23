@@ -1,17 +1,33 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <el-container id="app">
+    <el-header>
+      <TopNav v-bind:user="user" v-bind:active-index='activeIndex'/>
+    </el-header>
+    <el-main>
+      <router-view></router-view>
+      <jio/>
+    </el-main>
+    <el-footer>
+    </el-footer>
+  </el-container>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TopNav from "@/components/TopNav";
+import Jio from "@/components/Jio";
 
+const AV=require('leancloud-storage');
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    Jio,
+    TopNav
+  },
+  data:function () {
+    return{
+      user:AV.User.current(),
+      activeIndex:'1'
+    }
   }
 }
 </script>
