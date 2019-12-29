@@ -11,6 +11,27 @@
       "font_class": "logo",
       "unicode": "e602",
       "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "12577459",
+      "name": "tail",
+      "font_class": "tail",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "12580249",
+      "name": "Untitled-1",
+      "font_class": "back",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "12580250",
+      "name": "Untitled-1",
+      "font_class": "next",
+      "unicode": "e606",
+      "unicode_decimal": 58886
     }
   ]
 }

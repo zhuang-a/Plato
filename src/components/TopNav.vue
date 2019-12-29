@@ -1,33 +1,52 @@
 <template>
-    <el-row>
-        <el-col :xs="1" :sm="1" :md="1" :lg="1" :xl="1">
-            <svg class="top-nav-icon">
-                <use xlink:href="#el-icon-xinli-logo"></use>
+    <el-row style="background: white;display: flex;align-items: center" ref="topNav">
+        <el-col span="1">
+            <svg class="top-nav-icon icon">
+                <use xlink:href="#el-icon-xinli-logo"/>
             </svg>
         </el-col>
-        <el-col :xs="17" :sm="18" :md="19" :lg="20" :xl="21" >
-            <el-menu :default-active="activeIndex" style="float:right;" class="el-menu-demo" mode="horizontal" router=true>
+        <el-col span="16">
+            <el-menu :default-active="activeIndex" style="border-bottom: none"
+                     class="el-menu-demo" mode="horizontal" router=true>
                 <el-menu-item index="/">首页</el-menu-item>
-                <el-menu-item index="/test">测试</el-menu-item>
                 <el-submenu index="2">
-                    <template slot="title">介绍</template>
-                    <el-menu-item index="2-1">相关论文</el-menu-item>
-                    <el-menu-item index="2-2">视频资料</el-menu-item>
-                    <el-menu-item index="2-3">新闻</el-menu-item>
+                    <template slot="title">测试</template>
+                    <el-menu-item index="/test">分类测试</el-menu-item>
+                    <el-menu-item index="2-2">全部测试</el-menu-item>
                 </el-submenu>
                 <el-submenu index="3">
-                    <template slot="title">小游戏</template>
-                    <el-menu-item index="3-1">创造力游戏</el-menu-item>
-                    <el-menu-item index="3-2">人格游戏</el-menu-item>
-                    <el-menu-item index="3-3">职业规划游戏</el-menu-item>
+                    <template slot="title">资讯</template>
+                    <el-menu-item index="2-1">理论学习</el-menu-item>
+                    <el-menu-item index="2-2">新闻资讯</el-menu-item>
+                    <el-menu-item index="2-3">俱乐部信息</el-menu-item>
                 </el-submenu>
-                <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+                <el-submenu index="4">
+                    <template slot="title">发现</template>
+                    <el-menu-item index="3-1">创新小游戏</el-menu-item>
+                    <el-menu-item index="3-2">VR体验</el-menu-item>
+                </el-submenu>
+                <el-submenu index="5">
+                    <template slot="title">更多</template>
+                    <el-menu-item index="/about">关于我们</el-menu-item>
+                    <el-menu-item index="3-2">团队简介</el-menu-item>
+                    <el-menu-item index="3-2">业务领域</el-menu-item>
+                    <el-menu-item index="3-2">联系方式</el-menu-item>
+                    <el-menu-item index="3-2">更多产品</el-menu-item>
+                </el-submenu>
             </el-menu>
         </el-col>
-        <el-col :xs="6" :sm="5" :md="4" :lg="3" :xl="2">
+        <el-col span="7" style="justify-content: end">
+            <el-autocomplete
+                style="margin-right: 32px"
+                :placeholder="searchWorld"
+                 v-model="searchWorld"
+                :fetch-suggestions="search">
+                <template slot-scope="{item}">
+                    <div>{{item.get('title')}}</div>
+                </template>
+            </el-autocomplete>
             <template v-if="user == null">
                 <el-button @click="loginDialogVisible = true" type="primary">登录</el-button>
-                <el-button >注册</el-button>
                 <el-dialog
                         title="登录"
                         :visiable.sync= loginDialogVisible
@@ -48,6 +67,7 @@
 
 <script>
     import {Row,Col,Menu,Button,Input,Dialog,MenuItem,Avatar,Form,Submenu} from 'element-ui'
+    const AV=require('leancloud-storage');
     export default {
         components:{
             'el-row':Row,
@@ -62,6 +82,25 @@
             'el-submenu':Submenu
         },
         name: "TopNav",
+        data(){
+            return{
+                searchWorld:this.$store.state.searchWorld
+            }
+        },
+        methods:{
+          search(world,cb){
+              let query=new AV.Query('CreateTest');
+              query.contains('title',world);
+              query.find().then(function (data) {
+                  // eslint-disable-next-line no-console
+                  console.log(data);
+                  cb(data);
+              });
+
+              let a=this.searchWorld;
+              this.$store.commit('setSearchWorld',a);
+          }
+        },
         props:['user','activeIndex']
     }
 </script>

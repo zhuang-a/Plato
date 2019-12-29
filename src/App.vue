@@ -1,15 +1,9 @@
 <template>
-  <el-container id="app">
-    <el-header>
-      <TopNav v-bind:user="user" v-bind:active-index='activeIndex'/>
-    </el-header>
-    <el-main>
-      <router-view></router-view>
-      <jio/>
-    </el-main>
-    <el-footer>
-    </el-footer>
-  </el-container>
+  <div id="app" style="margin-top: 16px">
+    <TopNav v-show="!inTest" v-bind:user="user" v-bind:active-index='activeIndex' style="width: 100%"/>
+    <router-view/>
+    <jio/>
+  </div>
 </template>
 
 <script>
@@ -26,7 +20,12 @@ export default {
   data:function () {
     return{
       user:AV.User.current(),
-      activeIndex:'1'
+      activeIndex:'1',
+    }
+  },
+  computed:{
+    inTest:function () {
+      return this.$store.getters.getTest;
     }
   }
 }
@@ -40,5 +39,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  width: 100%;
 }
 </style>
