@@ -41,12 +41,14 @@
             const init=new AV.Query('Plato')
             init.get('5e00604b5620710093de0fa5').then(function (plato) {
                 // eslint-disable-next-line no-console
-                console.log(plato)
                 vm.value=plato.get('personNum')
-                vm.time=vm.value/100
+                vm.time=vm.value/1000
+                plato.set('personNum',vm.value+1)
+                plato.save().then(function () {
+
+                });
                 // eslint-disable-next-line no-console
-                console.log(vm.value)
-                this.numberGrow(vm.$refs.numberGrow)
+                vm.numberGrow(vm.$refs.numberGrow)
             });
         }
     }

@@ -46,11 +46,17 @@
                 <p>这次结果是根据尤金·劳德塞创造力测试研究进行评估，对创造力和影响创造</p>
                 <p>力的细分领域进行评估，给予你生活学习上的建议。</p>
                 <div style="height: 15vh;width: 4px;background: #E0663E;margin: 6px auto"/>
-                <span @click="getResult">你的总得分为 </span>
-                <span style="color: #E0663E;font-size: 72px">{{TotalMark}}</span>
+                <div>
+                    <span @click="getResult">你的总得分为 </span>
+                    <span style="color: #E0663E;font-size: 72px">{{TotalMark}}</span>
+                </div>
+                <el-button type="primary" @click="showMore">查看更多</el-button>
             </div>
-            <div id="radar" style="height: 100vh"></div>
-            <div @click="nextAnalysis" style="height: 100vh;width: 100vm;background: white;overflow: hidden;position: relative">
+            <div>
+
+            </div>
+            <div id="radar" ref="radar" style="height: 100vh;filter: blur(10px);"></div>
+            <div v-show="seeMore" @click="nextAnalysis" style="height: 100vh;width: 100vm;background: white;overflow: hidden;position: relative">
                 <div style="position: relative;left: 0;height: 40%">
                     <div style="padding: 96px 16vw">
                         <h1 ref="title" style="max-width: 80%;margin: 16px auto;">{{analysisTest[analysis]['type']}}</h1>
@@ -60,7 +66,7 @@
                     <el-button circle class="el-button next" icon="el-icon-arrow-right"/>
                 </div>
                 <div ref="analysis" style="height: 240vmax;width: 240vmax;transform-origin: center;
-            position: absolute;left:50%;transform: translateX(-50%) translateY(9%) rotate(0deg) ">
+            position: absolute;left:50%;transform: translateX(-50%) translateY(7%) rotate(0deg) ">
                     <div ref="circle" style="border-radius: 100%;
                 height: 100%;width: 100%" :style="{background:color[analysis]}"></div>
                     <div ref="current" class="current" :style="{backgroundImage: 'url('+img[analysis]+')',
@@ -97,7 +103,9 @@
                 percentage:0,
                 items:[],
                 answers:[],
+                seeMore:false,
                 des:[],
+                res:[],
                 current:0,
                 question50:[
                     {key: 1, text: '精神饱满的'}, {key: 2, text: '有说服力的'}, {key: 3, text: '实事求是的'}, {key: 4, text: '虚心的'}, {key: 5, text: '观察敏锐的'}, {key: 6, text: '谨慎的'}, {key: 7, text: '束手无策的'}, {key: 8, text: '足智多谋的'}, {key: 9, text: '自高自大的'}, {key: 10, text: '有主见的'},
@@ -188,7 +196,6 @@
                     vm.answers.push("-1");
                     vm.mark.push(data[i].get('mark'));
                 }
-
             })
         },
         mounted(){
@@ -205,14 +212,14 @@
                     let b=anime({
                         targets:title,
                         opacity:[0,1],
-                        duration:1000,
+                        duration:500,
                         easing:'easeInCubic',
                         autoplay:false,
                     });
                     let a=anime({
                         targets:title,
                         opacity:[1,0],
-                        duration:1000,
+                        duration:500,
                         easing:'easeInCubic',
                         autoplay:false,
                         complete:function () {
@@ -226,8 +233,6 @@
             },
             getResult(){
                 let vm=this;
-                // eslint-disable-next-line no-console
-                console.log(vm.mark);
                 let res={"1":0,"2":0,"3":0,"4":0,"5":0}
                 vm.answers.forEach(((value, index) => {
                     if(value!=="-1"){
@@ -236,24 +241,31 @@
                         }
                     }
                 }));
-                this.des=[];
+                vm.des=[];
                 for(let i in res){
                     let d=vm.analysisTest[i-1]['divided'];
                     let a=Math.floor(res[i]/d);
+                    // eslint-disable-next-line no-console
+                    console.log(a)
                     vm.des.push(this.analysisTest[i-1]['des'][a]);
                 }
-                this.submit=true;
-                this.drawRadar(res);
+                vm.submit=true;
+                vm.res=res
+                setTimeout(function () {
+                    vm.drawRadar();
+                },1000)
             },
-            drawRadar(res){
+            showMore(){
+                let vm=this;
+                vm.seeMore=true;
+                let radar=this.$refs.radar
+                radar.style.filter= "blur(0)"
+            },
+            drawRadar(){
                 // eslint-disable-next-line no-console
                 let data=[{
-                    value:[res["1"],res["2"],res["3"],res["4"],res["5"]]
+                    value:[this.res["1"],this.res["2"],this.res["3"],this.res["4"],this.res["5"]]
                 }];
-                // eslint-disable-next-line no-console
-                console.log('123')
-                // eslint-disable-next-line no-console
-                console.log(res)
                 let radar=this.$eCharts.init(document.getElementById('radar'));
                 let option={
                     radar:[
@@ -285,18 +297,23 @@
                     ],
                     series:[
                         {
-                            type:'radar',
-                            data:data,
-                            symbol:'rect',
-                            lineStyle:{
-                                normal:{
-                                    opacity:0
+                            type: 'radar',
+                            data: data,
+                            symbol: 'rect',
+                            lineStyle: {
+                                normal: {
+                                    opacity: 0
                                 }
                             },
-                            itemStyle:{
-                              normal:{
-                                  color:'rgba(221,107,67,0.46)'
-                              }
+                            itemStyle: {
+                                normal: {
+                                    color: 'rgba(221,107,67,0.46)'
+                                }
+                            },
+                            areaStyle: {                // 单项区域填充样式
+                                normal: {
+                                    color: 'rgba(221,107,67,0.46)'       // 填充的颜色。[ default: "#000" ]
+                                }
                             }
                         }
                     ],

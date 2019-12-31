@@ -6,11 +6,12 @@
         enter-active-class="animated fadeIn">
         <img src="../img/home.png">
         </transition>
-        <div style="font-size: 32px">
-          <vue-typer text='专业心理测量量表平台' :repeat='0'/>
+        <div style="font-size: 48px">
+          <vue-typer type-delay='400' text='专业心理测量量表平台' :repeat='0'/>
         </div>
       </div>
       <Banner/>
+
     </div>
 
 <!--    <PersonNum value="72000"/>-->
@@ -45,7 +46,9 @@
             <div style="font-size: 36px;width: 60%;max-width: 80vw;margin-bottom: 8vh">
               最全量表平台，许你内心一把量尺，则无惧世事；你看似冰冷的外表，实则隐埋炙热而有力量的内心。
             </div>
-            <el-button>进入测试</el-button>
+            <router-link to="/test">
+              <el-button>进入测试</el-button>
+            </router-link>
           </div>
         </el-col>
         <el-col span="12" class="box" v-scroll="enterBlueBook">

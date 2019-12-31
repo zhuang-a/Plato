@@ -7,7 +7,7 @@
                 <p>{{tag.title}}</p>
             </el-col>
         </el-row>
-        <div style="background: #071D61;padding: 8vmin">
+        <div style="background: #E0663E;padding: 8vmin">
             <div style="background: white">
                 <h1>测试库</h1>
                 <div>
@@ -72,6 +72,9 @@
             query.find().then(function (data) {
                 vm.tests=data;
             })
+        },
+        mounted(){
+            document.documentElement.style.backgroundColor='#fff';
         }
     }
 </script>

@@ -1,7 +1,7 @@
 <template>
-  <div id="app" style="margin-top: 16px">
+  <div id="app">
     <TopNav v-show="!inTest" v-bind:user="user" v-bind:active-index='activeIndex' style="width: 100%"/>
-    <router-view/>
+    <router-view></router-view>
     <jio/>
   </div>
 </template>
