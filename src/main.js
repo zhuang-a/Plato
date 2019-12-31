@@ -1,38 +1,36 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
-import VCharts from 'v-charts'
 import App from './App.vue'
 import VueRouter from 'vue-router'
 import HelloWorld from "@/components/HelloWorld";
 import QuestionCard from "@/components/CreateTest";
 import About from "@/components/About";
+import Test from "@/components/Test";
 import './assets/plato.scss';
 import './assets/icon/iconfont';
 import './assets/icon/iconfont.css';
 import './assets/main.css';
 import animated from 'animate.css'
-import Test from "@/components/Test";
 import eCharts from 'echarts'
 import Vuex from 'vuex'
 
 Vue.prototype.$eCharts=eCharts;
 Vue.use(ElementUI);
 Vue.use(VueRouter);
-Vue.use(VCharts);
 Vue.use(animated);
 Vue.use(Vuex);
 
 Vue.config.productionTip = false;
 const routes=[
-  {path:'/',component:HelloWorld},
-  {path:'/question',component: QuestionCard},
-  {path:'/test',component:Test},
-  {path:'/about',component:About}
+  {path:'/',name:'plato',component:HelloWorld},
+  {path:'/question',name:'creatTest',component: QuestionCard},
+  {path:'/test',name:'test',component:Test},
+  {path:'/about',name:'about',component:About}
 ];
 
 const router=new VueRouter({
   routes,
-  mode:'history'
+  //mode:'history'
 });
 
 const store=new Vuex.Store({
