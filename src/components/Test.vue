@@ -25,8 +25,8 @@
                     <div v-for="test in tests" :key="test.title"
                          style="width: calc(50% - 32px);display: flex;border:#74BD4A solid 1px;
                          margin-bottom: 64px; padding: 16px">
-                        <div style="width: 40%;">
-                            <img src="../img/3.png" alt="" style="width: 100%">
+                        <div style="width: 30%;">
+                            <img :src="test.get('pic').get('url')" alt="还没有图呢" style="height: 200px">
                         </div>
                         <div style="text-align: left;position:relative; margin-left: 16px">
                             <p style="font-size: 36px">{{test.get('name')}}</p>
@@ -60,9 +60,7 @@
                     {title:'能力挖掘',pic:require('../img/ability.png')},
                     {title: '职业规划',pic:require('../img/work.png')}
                 ],
-                tests:[
-                    {title:'霍兰德职业测试',pic:'',des:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio. '}
-                ],
+                tests:[],
                 searchWorld:'233'
             }
         },
@@ -99,8 +97,5 @@
         height: 50%;
         background: orange;
         z-index: -1;
-    }
-    .el-col{
-        padding: 8vh;
     }
 </style>

@@ -4,7 +4,7 @@
       <div >
         <transition name="show" appear appear-active-class="animated fadeIn"
         enter-active-class="animated fadeIn">
-        <img src="../img/home.png">
+        <img src="../img/home.png" alt="">
         </transition>
         <div style="font-size: 48px">
           <vue-typer type-delay='400' text='专业心理测量量表平台' :repeat='0'/>
@@ -13,31 +13,6 @@
       <Banner/>
 
     </div>
-
-<!--    <PersonNum value="72000"/>-->
-<!--    <el-row type="flex" justify="space-around">-->
-<!--      <el-col span=16>-->
-<!--        <div id="map" style="width: 100%;height: 400px;"/>-->
-<!--      </el-col>-->
-<!--    </el-row>-->
-<!--    <el-row type="flex" justify="space-around">-->
-<!--      <el-col span=16>-->
-<!--        <div id="zhuChart" style="width: 100%;height: 600px;"/>-->
-<!--      </el-col>-->
-<!--    </el-row>-->
-<!--    <h1>专业的声音</h1>-->
-<!--    <el-row type="flex" justify="space-around" v-if="false">-->
-<!--      <el-col v-for="comment in comments" :key="comment.name" span=6 >-->
-<!--        <el-card>-->
-<!--          <el-image fit="cover" :src="comment.get('avatar').get('url')" style="width: 100%"/>-->
-<!--          <h1>{{comment.get('name')}}</h1>-->
-<!--          <p>{{comment.get('work')}}</p>-->
-<!--          <p>{{comment.get('comment')}}</p>-->
-<!--          <el-divider/>-->
-<!--          <el-button type="primary" round>了解更多</el-button>-->
-<!--        </el-card>-->
-<!--      </el-col>-->
-<!--    </el-row>-->
     <div style='color: white;margin-bottom: 20vh' class="full-screen" >
       <el-row class="box">
         <el-col span="12">
@@ -132,12 +107,6 @@
         plato:"",
         book:"",
         comments: [],
-        advances:[
-          {id:1,title:"专业",text:"美国国际教育联盟（AAFIE）高等教育总监，美国Loyola Marymount University研究所“系统工程”教授，长期从事航空航天领域全球项目管理。之前任美国诺斯罗普·格鲁门公司资深项目经理。 "},
-          {id:1,title:"专业",text:"美国国际教育联盟（AAFIE）高等教育总监，美国Loyola Marymount University研究所“系统工程”教授，长期从事航空航天领域全球项目管理。之前任美国诺斯罗普·格鲁门公司资深项目经理。 "},
-          {id:1,title:"专业",text:"美国国际教育联盟（AAFIE）高等教育总监，美国Loyola Marymount University研究所“系统工程”教授，长期从事航空航天领域全球项目管理。之前任美国诺斯罗普·格鲁门公司资深项目经理。 "},
-          {id:1,title:"专业",text:"美国国际教育联盟（AAFIE）高等教育总监，美国Loyola Marymount University研究所“系统工程”教授，长期从事航空航天领域全球项目管理。之前任美国诺斯罗普·格鲁门公司资深项目经理。 "}
-        ]
       }
     },
     computed:{
@@ -190,10 +159,10 @@
 
       // eslint-disable-next-line no-unused-vars
       setBackground(evt, el){
-
+        if(this.$route.path!=="/"){
+          return
+        }
         let height=document.documentElement.scrollTop;
-        // eslint-disable-next-line no-console
-        console.log(height/window.innerHeight);
         let color="";
         switch (true) {
           case height<1.4*window.innerHeight:color='#fff';break;
@@ -244,8 +213,8 @@
       },
       enterRed(evt, el){
         if(document.documentElement.scrollTop>2.5*window.innerHeight){
-          el.classList.add('fadeInUp')
-          el.classList.add('animated')
+          el.classList.add('fadeInUp');
+          el.classList.add('animated');
         }
       }
     },
@@ -264,7 +233,9 @@
       this.drawZhuChart();
       this.drawMap();
     },
+    destroyed(){
 
+    },
     directives:{
       scroll:{
         // eslint-disable-next-line no-unused-vars

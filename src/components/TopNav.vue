@@ -20,11 +20,14 @@
                     <el-menu-item index="2-2">新闻资讯</el-menu-item>
                     <el-menu-item index="2-3">俱乐部信息</el-menu-item>
                 </el-submenu>
-                <el-submenu index="4">
-                    <template slot="title">发现</template>
-                    <el-menu-item index="3-1">创新小游戏</el-menu-item>
-                    <el-menu-item index="3-2">VR体验</el-menu-item>
-                </el-submenu>
+                <el-menu-item index="/find">
+                    发现
+                </el-menu-item>
+<!--                <el-submenu index="/find">-->
+<!--                    <template slot="title" >发现</template>-->
+<!--                    <el-menu-item index="/find">创新小游戏</el-menu-item>-->
+<!--                    <el-menu-item index="3-2">VR体验</el-menu-item>-->
+<!--                </el-submenu>-->
                 <el-submenu index="5">
                     <template slot="title">更多</template>
                     <el-menu-item index="/about">关于我们</el-menu-item>

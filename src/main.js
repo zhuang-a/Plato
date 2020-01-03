@@ -13,6 +13,7 @@ import './assets/main.css';
 import animated from 'animate.css'
 import eCharts from 'echarts'
 import Vuex from 'vuex'
+import Find from "@/components/Find";
 
 Vue.prototype.$eCharts=eCharts;
 Vue.use(ElementUI);
@@ -25,7 +26,9 @@ const routes=[
   {path:'/',name:'plato',component:HelloWorld},
   {path:'/question',name:'creatTest',component: QuestionCard},
   {path:'/test',name:'test',component:Test},
-  {path:'/about',name:'about',component:About}
+  {path:'/about',name:'about',component:About},
+  {path:'/find',name:'find',component:Find}
+
 ];
 
 const router=new VueRouter({

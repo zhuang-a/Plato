@@ -12,7 +12,7 @@
                         <el-radio class="radio-yellow" label=1 border>不确定</el-radio>
                         <el-radio class="radio-red" label=2 border>不同意</el-radio>
                     </el-radio-group>
-                    <img :src="items[current].get('pic').get('url')" style="height: 40vh"/>
+                    <img :src="items[current].get('pic').get('url')" style="height: 40vh" alt=""/>
                 </div>
                 <el-button v-show="current!==48" @click="current++" circle class="el-button next" icon="el-icon-arrow-right"/>
                 <div style="position: absolute;bottom: 32px;width: 90%;left: 50%;transform: translateX(-50%);transition: transform .5s">
@@ -119,7 +119,7 @@
                 result:"aaaa",
                 submit:false,
                 mark:[],
-                hover:false
+                hover:false,
             }
         },
         computed:{
@@ -199,8 +199,7 @@
             })
         },
         mounted(){
-            // eslint-disable-next-line no-console
-            this.$store.commit('goInTest',true)
+            this.$store.commit('goInTest',true);
             document.documentElement.style.backgroundColor='#E0663E'
         },
         methods:{
@@ -233,7 +232,7 @@
             },
             getResult(){
                 let vm=this;
-                let res={"1":0,"2":0,"3":0,"4":0,"5":0}
+                let res={"1":0,"2":0,"3":0,"4":0,"5":0};
                 vm.answers.forEach(((value, index) => {
                     if(value!=="-1"){
                         for(let key in vm.mark[index]){
@@ -245,12 +244,10 @@
                 for(let i in res){
                     let d=vm.analysisTest[i-1]['divided'];
                     let a=Math.floor(res[i]/d);
-                    // eslint-disable-next-line no-console
-                    console.log(a)
                     vm.des.push(this.analysisTest[i-1]['des'][a]);
                 }
                 vm.submit=true;
-                vm.res=res
+                vm.res=res;
                 setTimeout(function () {
                     vm.drawRadar();
                 },1000)
@@ -258,7 +255,7 @@
             showMore(){
                 let vm=this;
                 vm.seeMore=true;
-                let radar=this.$refs.radar
+                let radar=this.$refs.radar;
                 radar.style.filter= "blur(0)"
             },
             drawRadar(){
